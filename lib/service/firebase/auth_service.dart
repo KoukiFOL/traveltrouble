@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../screen/home.dart';
 import '../../screen/login.dart';
+import 'auth_error.dart';
 import 'database_service.dart';
 
 class AuthService with ChangeNotifier {
@@ -27,7 +28,7 @@ class AuthService with ChangeNotifier {
   get isLoading => null;
 
   // サインアップ
-  Future<User?> signUpWithEmailAndPassword(
+  Future<FirebaseAuthResultStatus> signUpWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     print("サインアップ");
     try {
@@ -46,19 +47,17 @@ class AuthService with ChangeNotifier {
           from,
         );
         // ログイン成功時の処理
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
       }
-      return result.user;
+      return FirebaseAuthResultStatus.Successful;
     } catch (e) {
       print("サインアップエラー: $e");
-      return null;
+      final error = handleException(e as FirebaseAuthException);
+      return error;
     }
   }
 
   // ログイン
-  Future<User?> signInWithEmailAndPassword(
+  Future<FirebaseAuthResultStatus?> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
       final result = await _auth.signInWithEmailAndPassword(
@@ -72,10 +71,12 @@ class AuthService with ChangeNotifier {
           MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       }
-      return result.user;
+      return FirebaseAuthResultStatus.Successful;
     } catch (e) {
+      // エラーハンドリングによるエラーメッセージの表示
+      final error = handleException(e as FirebaseAuthException);
       print("ログインエラー: $e");
-      return null;
+      return error;
     }
   }
 
@@ -93,9 +94,6 @@ class AuthService with ChangeNotifier {
           user.email ?? '',
           user.displayName ?? '虎ブッタ',
           'Japan',
-        );
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       }
       return result.user;
