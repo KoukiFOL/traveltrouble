@@ -3,6 +3,7 @@ import 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../screen/home.dart';
 import '../../screen/login.dart';
@@ -25,13 +26,28 @@ class AuthService with ChangeNotifier {
 
   // サインアップ
   Future<User?> signUpWithEmailAndPassword(
-      String email, String password) async {
+      String email, String password, BuildContext context) async {
     print("サインアップ");
     try {
       final result = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      final user = result.user;
+      final from = "Japan";
+
+      if (user != null) {
+        await addUserDataToFirestore(
+          user.uid,
+          email,
+          user.displayName ?? '虎ブッタ',
+          from,
+        );
+        // ログイン成功時の処理
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      }
       return result.user;
     } catch (e) {
       print("サインアップエラー: $e");
@@ -69,5 +85,23 @@ class AuthService with ChangeNotifier {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => LoginScreen()),
     );
+  }
+
+  // FireStoreにユーザーを登録
+  Future<void> addUserDataToFirestore(
+      String userId, String email, String displayName, String from) async {
+    final firestore = FirebaseFirestore.instance;
+    print("userID: $userId");
+    print("email: $email");
+    try {
+      await firestore.collection('users').doc(userId).set({
+        'email': email,
+        'displayName': displayName,
+        'from': from,
+        // 他のユーザーデータを追加できます
+      });
+    } catch (e) {
+      print('Firestoreへのユーザーデータの追加に失敗しました: $e');
+    }
   }
 }
