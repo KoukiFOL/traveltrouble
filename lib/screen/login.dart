@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../service/firebase/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -33,19 +32,19 @@ class LoginScreen extends StatelessWidget {
             // ログインボタン
             ElevatedButton(
               onPressed: () async {
-                // final email = emailController.text;
-                // final password = passwordController.text;
-                // final user = await authService.signInWithEmailAndPassword(
-                //     email, password);
-                // if (user != null) {
-                //   // ログイン成功時の処理
-                //   print('ログイン成功: ${user.uid}');
-                // } else {
-                //   // ログイン失敗時の処理
-                //   print('ログイン失敗');
-                // }
+                final email = emailController.text;
+                final password = passwordController.text;
+                final user = await authService.signUpWithEmailAndPassword(
+                    email, password, context);
+                if (user != null) {
+                  // ログイン成功時の処理
+                  print('ログイン成功: ${user.uid}');
+                } else {
+                  // ログイン失敗時の処理
+                  print('ログイン');
+                }
               },
-              child: Text('ログイン'),
+              child: Text('LOGIN'),
             ),
           ],
         ),
