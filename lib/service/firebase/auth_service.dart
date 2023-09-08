@@ -4,6 +4,7 @@ import 'dart:js';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:traveltrouble/Router/ScreenRouter.dart';
 
 import '../../screen/home.dart';
 import '../../screen/login.dart';
@@ -108,8 +109,6 @@ class AuthService with ChangeNotifier {
     await _auth.signOut();
     print("ログアウト完了");
     // ログアウト後にログイン画面に遷移
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    LoginRouter(context);
   }
 }
