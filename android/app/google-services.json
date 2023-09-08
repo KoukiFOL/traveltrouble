@@ -29,6 +29,13 @@
             {
               "client_id": "202411656895-8t9orb3p0iv468j3b5hna3kej0490n9c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "202411656895-a9emi4i421fi1lcpbg43ueo91f97v0g6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.traveltrouble.RunnerTests"
+              }
             }
           ]
         }
