@@ -79,6 +79,32 @@ class AuthService with ChangeNotifier {
     }
   }
 
+  // Googleを使ったログイン
+  Future<User?> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleAuthProvider googleProvider = GoogleAuthProvider();
+      final result = await _auth.signInWithPopup(googleProvider);
+      final user = result.user;
+      if (user != null) {
+        // ログイン成功時の処理
+        // Firestoreにユーザー情報を保存
+        await database.addUserDataToFirestore(
+          user.uid,
+          user.email ?? '',
+          user.displayName ?? '虎ブッタ',
+          'Japan',
+        );
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      }
+      return result.user;
+    } catch (e) {
+      print("Googleログインエラー: $e");
+      return null;
+    }
+  }
+
   // ログアウト
   Future<void> signOut(BuildContext context) async {
     await _auth.signOut();
