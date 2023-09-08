@@ -3,6 +3,9 @@ import 'package:traveltrouble/Router/router.dart';
 import '/screen/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart'; // providerをインポート
+import 'service/firebase/auth_service.dart'; // AuthServiceをインポート
+import 'screen/login.dart';
 
 void main() {
   Firebase.initializeApp(
@@ -17,11 +20,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: goRouter.routerDelegate,
-      routeInformationParser: goRouter.routeInformationParser,
-      routeInformationProvider: goRouter.routeInformationProvider,
-
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -42,7 +41,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const AccoutScreen(),
     );
   }
 }
