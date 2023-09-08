@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:traveltrouble/Router/router.dart';
 import '/screen/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
