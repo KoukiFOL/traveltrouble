@@ -7,9 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../screen/home.dart';
 import '../../screen/login.dart';
+import 'database_service.dart';
 
 class AuthService with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final database = DatabaseService();
 
   User? get currentUser => _auth.currentUser;
   bool get isLoggedIn => currentUser != null;
@@ -37,7 +39,7 @@ class AuthService with ChangeNotifier {
       final from = "Japan";
 
       if (user != null) {
-        await addUserDataToFirestore(
+        await database.addUserDataToFirestore(
           user.uid,
           email,
           user.displayName ?? '虎ブッタ',
@@ -85,23 +87,5 @@ class AuthService with ChangeNotifier {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => LoginScreen()),
     );
-  }
-
-  // FireStoreにユーザーを登録
-  Future<void> addUserDataToFirestore(
-      String userId, String email, String displayName, String from) async {
-    final firestore = FirebaseFirestore.instance;
-    print("userID: $userId");
-    print("email: $email");
-    try {
-      await firestore.collection('users').doc(userId).set({
-        'email': email,
-        'displayName': displayName,
-        'from': from,
-        // 他のユーザーデータを追加できます
-      });
-    } catch (e) {
-      print('Firestoreへのユーザーデータの追加に失敗しました: $e');
-    }
   }
 }

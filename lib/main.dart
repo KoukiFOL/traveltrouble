@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:traveltrouble/Router/router.dart';
 import '/screen/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:traveltrouble/screen/home.dart';
+import 'package:traveltrouble/service/firebase/database_service.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart'; // providerをインポート
 import 'service/firebase/auth_service.dart'; // AuthServiceをインポート
@@ -12,8 +14,13 @@ void main() {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => AuthService(), // AuthProviderを提供
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthService()), // AuthServiceを提供
+        ChangeNotifierProvider(
+            create: (_) => DatabaseService()), // OtherServiceを提供
+        // 他のProviderも必要に応じて追加できます
+      ],
       child: const MyApp(),
     ),
   );
