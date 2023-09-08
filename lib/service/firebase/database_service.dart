@@ -66,4 +66,10 @@ class DatabaseService with ChangeNotifier {
         .then((value) => print("Post Added"))
         .catchError((error) => print("Failed to add post: $error"));
   }
+
+  // Postsコレクションから投稿を一覧で取得
+  Future<QuerySnapshot> getPostsFromFirestore() {
+    // 投稿を取得
+    return _db.collection('posts').get();
+  }
 }
