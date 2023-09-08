@@ -43,7 +43,7 @@ class DatabaseService with ChangeNotifier {
     List<String> tags,
   ) {
     // 投稿を追加
-    // コレクション内容 users/{uid}/posts/{postId}
+    // コレクション内容 users/{uid}/posts/{postId}とPosts/{postId}の二つに追加
     return _db
         .collection('users')
         .doc(uid)
@@ -54,7 +54,16 @@ class DatabaseService with ChangeNotifier {
           'post': post,
           'tags': tags,
         })
-        .then((value) => print("投稿を追加しました"))
-        .catchError((error) => print("投稿の追加に失敗しました: $error"));
+        .then((value) {
+          _db.collection('posts').doc(value.id).set({
+            'createdAt': Timestamp.now(),
+            'destination': destination,
+            'post': post,
+            'tags': tags,
+            'uid': uid,
+          });
+        })
+        .then((value) => print("Post Added"))
+        .catchError((error) => print("Failed to add post: $error"));
   }
 }
