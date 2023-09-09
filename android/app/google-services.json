@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "202411656895",
+    "project_id": "trable-travel",
+    "storage_bucket": "trable-travel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202411656895:android:cb43ffadbff80c83a6e80a",
+        "android_client_info": {
+          "package_name": "com.example.traveltrouble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202411656895-6b8nfe89qpqu8aodqfk3bvfulj0u5a8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Av4nUlXndpUI7TFNVCA9wJpNVG6BjAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202411656895-6b8nfe89qpqu8aodqfk3bvfulj0u5a8b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "202411656895-a9emi4i421fi1lcpbg43ueo91f97v0g6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.traveltrouble.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
