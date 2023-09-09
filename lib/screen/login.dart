@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../Compornents/dialog.dart';
@@ -154,8 +155,9 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Image.asset(
-                      //   'lib/assets/google.svg', // SVGファイルのパス
+                      // なぜか画像が表示されない
+                      // SvgPicture.asset(
+                      //   'assets/google.svg', // SVGファイルのパス
                       //   width: 20.0, // 幅の指定
                       //   height: 20.0, // 高さの指定
                       // ),
