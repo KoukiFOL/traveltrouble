@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 Container(
-                  color: item1Selected ? Colors.green : Colors.red, // 背景色を変更
+                  color: item1Selected ? Colors.green : Colors.red,
                   child: ListTile(
                     title: GestureDetector(
                       onTap: toggleItem1,
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                  color: item2Selected ? Colors.green : Colors.red, // 背景色を変更
+                  color: item2Selected ? Colors.green : Colors.red,
                   child: ListTile(
                     title: GestureDetector(
                       onTap: toggleItem2,
@@ -83,6 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: '検索...',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(8.0),
+                      prefixIcon: Icon(Icons.search),
+                    ),
                   ),
                 ),
               ],
@@ -112,6 +120,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed();
         },
       ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.person), // "person1"のアイコンを追加
+          onPressed: () {
+            // ボタンが押されたときの処理をここに追加
+            // 例えば、プロフィール画面に遷移するなど
+          },
+        ),
+      ],
     );
   }
 }
