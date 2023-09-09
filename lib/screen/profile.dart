@@ -14,13 +14,27 @@ class ProfileScreen extends StatelessWidget {
         Provider.of<DatabaseService>(context); // DatabaseServiceを取得
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            onPressed: () {
-              context.goNamed('home');
-            },
-            icon: const Image(image: AssetImage('../assets/arrow_left.png')),
-          )),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            context.goNamed('home');
+          },
+          icon: const Image(image: AssetImage('../assets/arrow_left.png')),
+        ),
+        actions: [
+          SizedBox(
+            width: 50,
+            height: 50,
+            child: IconButton(
+              icon: const Image(image: AssetImage('../assets/logout.png')),
+              onPressed: () {
+                // ログアウト処理
+                authService.signOut(context);
+              },
+            ),
+          )
+        ],
+      ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
