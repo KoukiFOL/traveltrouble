@@ -27,18 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _scaffoldKey.currentState?.openDrawer();
   }
 
-  void toggleItem1() {
-    setState(() {
-      item1Selected = !item1Selected;
-    });
-  }
-
-  void toggleItem2() {
-    setState(() {
-      item2Selected = !item2Selected;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,34 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 Container(
-                  color: item1Selected ? Colors.green : Colors.red,
-                  child: ListTile(
-                    title: GestureDetector(
-                      onTap: toggleItem1,
-                      child: Text(
-                        'メニュー項目1 ${item1Selected ? 'ON' : 'OFF'}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: item2Selected ? Colors.green : Colors.red,
-                  child: ListTile(
-                    title: GestureDetector(
-                      onTap: toggleItem2,
-                      child: Text(
-                        'メニュー項目2 ${item2Selected ? 'ON' : 'OFF'}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
                   margin: EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -86,13 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: '検索...',
+                      hintText: 'Search...',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(8.0),
                       prefixIcon: Icon(Icons.search),
                     ),
                   ),
                 ),
+                Text('From'),
+                DropdownButtonMenu(), // ここにDropdownButtonMenuを追加
+                Icon(Icons.arrow_downward),
+                Text('To'),
+                DropdownButtonMenu(), // ここにDropdownButtonMenuを追加
               ],
             ),
           ],
@@ -113,7 +78,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('アプリのタイトル'),
+      title: Text(' '),
       leading: IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
@@ -129,6 +94,51 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class DropdownButtonMenu extends StatefulWidget {
+  const DropdownButtonMenu({Key? key}) : super(key: key);
+
+  @override
+  State<DropdownButtonMenu> createState() => _DropdownButtonMenuState();
+}
+
+class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
+  String isSelectedValue = 'Alfa';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+      items: const [
+        DropdownMenuItem(
+          value: 'Alfa',
+          child: Text('Alfa'),
+        ),
+        DropdownMenuItem(
+          value: 'Bravo',
+          child: Text('Bravo'),
+        ),
+        DropdownMenuItem(
+          value: 'Charlie',
+          child: Text('Charlie'),
+        ),
+        DropdownMenuItem(
+          value: 'Delta',
+          child: Text('Delta'),
+        ),
+        DropdownMenuItem(
+          value: 'Foxtrot',
+          child: Text('Foxtrot'),
+        ),
+      ],
+      value: isSelectedValue,
+      onChanged: (String? value) {
+        setState(() {
+          isSelectedValue = value!;
+        });
+      },
     );
   }
 }
