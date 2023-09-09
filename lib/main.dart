@@ -55,8 +55,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -64,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-
     });
   }
 
@@ -78,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
 
     return Scaffold(
-
       body: const Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -99,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
+              //title
               width: 239,
               height: 43,
               child: Text(
@@ -115,40 +112,65 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(
+              width: 113,
+              height:113,
+            ),
+
+            SizedBox(
+              //Email form
               width: 327,
               height: 57,
+
               child: TextField(
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                  ),
                   hintText: "E-mail",
+                  icon: Icon(Icons.person_2),
                 ),
-
               ),
             ),
+            SizedBox(//空白
+              width: 327,
+              height:41,
+            ),
             SizedBox(
+              //password form
               width: 327,
               height: 57,
               child: TextField(
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(),
                   hintText: "Password",
+                  icon: Icon(Icons.key),
                 ),
               ),
             ),
+            SizedBox(//空白
+              width:327,
+              height:90,
+            ),
             SizedBox(
-              width:81,
-              height:10,
+              width: 224,
+              height: 40,
               child: ElevatedButton(
-                  onPressed: null , // nullを(){}に差し替えて{}無いに処理を記述する
-                  child:Text("login"),
-
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.orange),
+                  foregroundColor: MaterialStatePropertyAll(Colors.white),
+                ),
+                onPressed: null, // nullを(){}に差し替えて{}無いに処理を記述する
+                child: Text("login"),
               ),
-            )
+            ),
+            SizedBox(
+              width:327,
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
