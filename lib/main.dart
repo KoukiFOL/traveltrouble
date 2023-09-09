@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:traveltrouble/Router/router.dart';
-import '/screen/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:traveltrouble/screen/home.dart';
 import 'package:traveltrouble/service/firebase/database_service.dart';

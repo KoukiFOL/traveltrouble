@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
                 context.goNamed('post');
               },
             ),
+
           ],
         ),
       ),
