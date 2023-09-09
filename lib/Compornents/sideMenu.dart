@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../model/country.dart';
+
 // サイドメニューの実装
 class SideMenu extends StatelessWidget {
   @override
@@ -27,11 +29,21 @@ class SideMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('From'),
-              DropdownButtonMenu(),
-              Icon(Icons.arrow_downward),
-              Text('To'),
-              DropdownButtonMenu(),
+              Container(
+                width: 200,
+                alignment: Alignment.centerLeft,
+                child: const Text('From'),
+              ),
+              const DropdownButtonMenu(),
+              const SizedBox(height: 7),
+              const Icon(Icons.arrow_downward),
+              const SizedBox(height: 7),
+              Container(
+                width: 200,
+                alignment: Alignment.centerLeft,
+                child: const Text('To'),
+              ),
+              const DropdownButtonMenu(),
             ],
           ),
         ],
@@ -49,7 +61,7 @@ class DropdownButtonMenu extends StatefulWidget {
 }
 
 class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
-  String isSelectedValue = 'Alfa';
+  String isSelectedValue = 'Japan';
 
   @override
   Widget build(BuildContext context) {
@@ -57,34 +69,18 @@ class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
         width: 200,
         child: DropdownButton(
           isExpanded: true,
-          items: const [
-            DropdownMenuItem(
-              value: 'Alfa',
-              child: Text('Alfa'),
-            ),
-            DropdownMenuItem(
-              value: 'Bravo',
-              child: Text('Bravo'),
-            ),
-            DropdownMenuItem(
-              value: 'Charlie',
-              child: Text('Charlie'),
-            ),
-            DropdownMenuItem(
-              value: 'Delta',
-              child: Text('Delta'),
-            ),
-            DropdownMenuItem(
-              value: 'Foxtrot',
-              child: Text('Foxtrot'),
-            ),
-          ],
           value: isSelectedValue,
           onChanged: (String? value) {
             setState(() {
               isSelectedValue = value!;
             });
           },
+          items: countryList.map((String value) {
+            return DropdownMenuItem(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
         ));
   }
 }
