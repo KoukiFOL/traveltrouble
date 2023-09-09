@@ -13,11 +13,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool item1Selected = false;
+  bool item2Selected = false;
 
   void openDrawerMenu() {
     _scaffoldKey.currentState?.openDrawer();
+  }
+
+  void toggleItem1() {
+    setState(() {
+      item1Selected = !item1Selected;
+    });
+  }
+
+  void toggleItem2() {
+    setState(() {
+      item2Selected = !item2Selected;
+    });
   }
 
   @override
@@ -29,32 +48,48 @@ class MyHomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text(''),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+            Column(
+              children: [
+                Container(
+                  color: item1Selected ? Colors.green : Colors.red, // 背景色を変更
+                  child: ListTile(
+                    title: GestureDetector(
+                      onTap: toggleItem1,
+                      child: Text(
+                        'メニュー項目1 ${item1Selected ? 'ON' : 'OFF'}',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  color: item2Selected ? Colors.green : Colors.red, // 背景色を変更
+                  child: ListTile(
+                    title: GestureDetector(
+                      onTap: toggleItem2,
+                      child: Text(
+                        'メニュー項目2 ${item2Selected ? 'ON' : 'OFF'}',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ],
             ),
-            DrawerTextField(),
-            ListTile(
-              title: Text('ドロワーメニュー項目1'),
-              onTap: () {
-                // ドロワーメニュー項目1がタップされたときの処理
-              },
-            ),
-            ListTile(
-              title: Text('ドロワーメニュー項目2'),
-              onTap: () {
-                // ドロワーメニュー項目2がタップされたときの処理
-              },
-            ),
-            // 他のメニュー項目を追加
-
-            // テキストフィールドを含むDrawerのカスタムウィジェット
           ],
         ),
       ),
-      // ページの本文部分をここに配置
     );
   }
 }
@@ -70,26 +105,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('とらぶった～'),
+      title: Text('アプリのタイトル'),
       leading: IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
           onPressed();
         },
-      ),
-    );
-  }
-}
-
-class DrawerTextField extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: '検索ワードを入力......',
-        ),
       ),
     );
   }
