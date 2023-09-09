@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.person),
             onPressed: () {
               // プロフィール画面に遷移するなどの処理を追加
+              context.goNamed('profile');
             },
           ),
         ],
