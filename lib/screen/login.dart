@@ -46,6 +46,7 @@ class LoginScreen extends StatelessWidget {
               height: 57,
               child: TextField(
                 controller: passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Password",

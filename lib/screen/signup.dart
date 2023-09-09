@@ -45,6 +45,7 @@ class SignupScreen extends StatelessWidget {
               width: 327,
               height: 57,
               child: TextField(
+                obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
