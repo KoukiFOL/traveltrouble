@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -106,8 +104,68 @@ class LoginScreen extends StatelessWidget {
                     )),
               ),
             ),
+            SizedBox(height: 40.0),
+            // OR CONNECT WITHのテキストを表示
             SizedBox(
               width: 327,
+              height: 20,
+              child: Row(
+                children: [
+                  Container(
+                    height: 1, // 棒線の高さを設定
+                    color: Colors.black, // 棒線の色を設定
+                    width: 150, // 棒線の幅を設定
+                  ),
+                  Text(
+                    ' OR ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Container(
+                    height: 1, // 棒線の高さを設定
+                    color: Colors.black, // 棒線の色を設定
+                    width: 150, // 棒線の幅を設定
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16.0),
+            // Googoleでログイン
+            SizedBox(
+              width: 224,
+              height: 40,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                        Color.fromRGBO(133, 193, 127, 1)),
+                    foregroundColor: MaterialStatePropertyAll(Colors.white),
+                  ),
+                  onPressed: () async {
+                    final result = await authService.signInWithGoogle(context);
+                    if (result != null) {
+                      context.goNamed('home');
+                    } else {
+                      showErrorDialog(context, 'Googleログインに失敗しました');
+                    }
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Image.asset(
+                      //   'lib/assets/google.svg', // SVGファイルのパス
+                      //   width: 20.0, // 幅の指定
+                      //   height: 20.0, // 高さの指定
+                      // ),
+                      Text("Google",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          )),
+                    ],
+                  )),
             ),
             TextButton(
                 onPressed: () => {context.goNamed('signup')},
