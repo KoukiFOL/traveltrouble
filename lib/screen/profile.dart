@@ -12,6 +12,8 @@ class ProfileScreen extends StatelessWidget {
     final authService = Provider.of<AuthService>(context);
     final databaseService =
         Provider.of<DatabaseService>(context); // DatabaseServiceを取得
+
+    final uid = authService.currentUser?.uid ?? '';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -40,8 +42,7 @@ class ProfileScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           FutureBuilder(
-            future: databaseService
-                .getUserDataFromFirestore(authService.currentUser?.uid ?? ''),
+            future: databaseService.getUserDataFromFirestore(uid),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator(); // データをロード中はローディングインジケータを表示
@@ -112,7 +113,13 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 104,
                   ),
-                  const Text('Troubles'),
+                  const Text(
+                    'Troubles',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -124,6 +131,35 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ],
+              );
+            },
+          ),
+          FutureBuilder(
+            future: databaseService.getUserPostsFromFirestore(uid),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              if (snapshot.hasError) {
+                return Text('エラー: ${snapshot.error}');
+              }
+              if (!snapshot.hasData || snapshot.data == null) {
+                return Text('投稿がありません');
+              }
+              final userPosts = snapshot.data?.docs ?? [];
+              print('userPosts: $userPosts');
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: userPosts.length,
+                  itemBuilder: (context, index) {
+                    final post =
+                        userPosts[index].data() as Map<String, dynamic>;
+                    return ListTile(
+                      title: Text(post['post']),
+                      subtitle: Text(post['destination']),
+                    );
+                  },
+                ),
               );
             },
           ),
