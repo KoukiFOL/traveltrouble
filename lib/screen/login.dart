@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../Compornents/dialog.dart';
 import '../service/firebase/auth_error.dart';
 import '../service/firebase/auth_service.dart';
 
@@ -95,38 +96,21 @@ class LoginScreen extends StatelessWidget {
                     context.goNamed('home');
                   } else {
                     final errorMessage = exceptionMessage(result!);
-                    _showErrorDialog(context, errorMessage);
+                    showErrorDialog(context, errorMessage);
                   }
                 },
-                child: Text("login"),
+                child: Text("LOGIN"),
               ),
             ),
             SizedBox(
               width: 327,
             ),
+            TextButton(
+                onPressed: () => {context.goNamed('signup')},
+                child: Text('Create Account')),
           ],
         ),
       ),
     );
   }
-}
-
-void _showErrorDialog(BuildContext context, String? message) {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext dialogContext) {
-      return AlertDialog(
-        title: Text(message!),
-        actions: <Widget>[
-          TextButton(
-            child: Text('OK'),
-            onPressed: () {
-              Navigator.pop(dialogContext);
-            },
-          ),
-        ],
-      );
-    },
-  );
 }
