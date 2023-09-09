@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:traveltrouble/Compornents/header.dart';
 
 // タイムライン画面
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('ホーム画面'),
-      ),
+      appBar: Header(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +27,6 @@ class HomeScreen extends StatelessWidget {
                 context.goNamed('post');
               },
             ),
-
           ],
         ),
       ),

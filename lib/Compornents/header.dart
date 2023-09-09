@@ -1,37 +1,24 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class SideMenu extends StatefulWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool item1Selected = false;
-  bool item2Selected = false;
 
   void openDrawerMenu() {
     _scaffoldKey.currentState?.openDrawer();
   }
 
   @override
+  _SideMenuState createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
+  bool item1Selected = false;
+  bool item2Selected = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: CustomAppBar(openDrawerMenu),
+      key: widget._scaffoldKey,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -54,10 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Text('From'),
-                DropdownButtonMenu(), // ここにDropdownButtonMenuを追加
+                DropdownButtonMenu(),
                 Icon(Icons.arrow_downward),
                 Text('To'),
-                DropdownButtonMenu(), // ここにDropdownButtonMenuを追加
+                DropdownButtonMenu(),
               ],
             ),
           ],
@@ -67,10 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Function onPressed;
+class Header extends StatelessWidget implements PreferredSizeWidget {
+  // final Function onPressed;
 
-  CustomAppBar(this.onPressed);
+  // CustomAppBar(this.onPressed);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -82,15 +69,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
-          onPressed();
+          SideMenu().openDrawerMenu(); // SideMenuクラスのインスタンスを作成してから呼び出す
         },
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.person), // "person1"のアイコンを追加
+          icon: Icon(Icons.person),
           onPressed: () {
-            // ボタンが押されたときの処理をここに追加
-            // 例えば、プロフィール画面に遷移するなど
+            // プロフィール画面に遷移するなどの処理を追加
           },
         ),
       ],

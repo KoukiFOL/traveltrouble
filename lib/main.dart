@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:traveltrouble/Router/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:traveltrouble/screen/home.dart';
@@ -35,12 +37,13 @@ class MyApp extends StatelessWidget {
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,
-
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
+      // LoginScreenを初期画面に設定
       // home: const AccoutScreen(),
+      // LoginScreenを初期画面に設定
     );
   }
 }
