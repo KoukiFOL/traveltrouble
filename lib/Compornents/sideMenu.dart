@@ -18,6 +18,7 @@ class SideMenu extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
+                  textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
                     hintText: 'Search...',
                     border: InputBorder.none,
@@ -52,35 +53,38 @@ class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      items: const [
-        DropdownMenuItem(
-          value: 'Alfa',
-          child: Text('Alfa'),
-        ),
-        DropdownMenuItem(
-          value: 'Bravo',
-          child: Text('Bravo'),
-        ),
-        DropdownMenuItem(
-          value: 'Charlie',
-          child: Text('Charlie'),
-        ),
-        DropdownMenuItem(
-          value: 'Delta',
-          child: Text('Delta'),
-        ),
-        DropdownMenuItem(
-          value: 'Foxtrot',
-          child: Text('Foxtrot'),
-        ),
-      ],
-      value: isSelectedValue,
-      onChanged: (String? value) {
-        setState(() {
-          isSelectedValue = value!;
-        });
-      },
-    );
+    return SizedBox(
+        width: 200,
+        child: DropdownButton(
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(
+              value: 'Alfa',
+              child: Text('Alfa'),
+            ),
+            DropdownMenuItem(
+              value: 'Bravo',
+              child: Text('Bravo'),
+            ),
+            DropdownMenuItem(
+              value: 'Charlie',
+              child: Text('Charlie'),
+            ),
+            DropdownMenuItem(
+              value: 'Delta',
+              child: Text('Delta'),
+            ),
+            DropdownMenuItem(
+              value: 'Foxtrot',
+              child: Text('Foxtrot'),
+            ),
+          ],
+          value: isSelectedValue,
+          onChanged: (String? value) {
+            setState(() {
+              isSelectedValue = value!;
+            });
+          },
+        ));
   }
 }
