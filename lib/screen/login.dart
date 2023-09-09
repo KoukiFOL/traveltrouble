@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../service/firebase/auth_service.dart';
 
@@ -17,34 +18,21 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Eメール入力フィールド
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Eメール'),
+          children: <Widget>[
+            Text(
+              'ログイン画面',
             ),
-            // パスワード入力フィールド
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'パスワード'),
-              obscureText: true, // パスワードを隠す
-            ),
-            // ログインボタン
             ElevatedButton(
-              onPressed: () async {
-                final email = emailController.text;
-                final password = passwordController.text;
-                final user = await authService.signUpWithEmailAndPassword(
-                    email, password, context);
-                if (user != null) {
-                  // ログイン成功時の処理
-                  print('ログイン成功: ${user.uid}');
-                } else {
-                  // ログイン失敗時の処理
-                  print('ログイン');
-                }
+              child: Text("ログイン"),
+              onPressed: () {
+                context.goNamed('home');
               },
-              child: Text('LOGIN'),
+            ),
+            ElevatedButton(
+              child: Text("新規登録"),
+              onPressed: () {
+                context.goNamed('signup');
+              },
             ),
           ],
         ),

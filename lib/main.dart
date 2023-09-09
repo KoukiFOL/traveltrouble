@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traveltrouble/Router/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:traveltrouble/screen/home.dart';
 import 'package:traveltrouble/service/firebase/database_service.dart';
@@ -30,8 +31,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
+    return MaterialApp.router(
+      routerDelegate: goRouter.routerDelegate,
+      routeInformationParser: goRouter.routeInformationParser,
+      routeInformationProvider: goRouter.routeInformationProvider,
+
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      // home: const AccoutScreen(),
     );
   }
 }
