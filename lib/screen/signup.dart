@@ -87,6 +87,11 @@ class SignupScreen extends StatelessWidget {
                     )),
               ),
             ),
+            SizedBox(
+              //空白
+              width: 327,
+              height: 20,
+            ),
             // back to login with text button
             SizedBox(
               child: TextButton(

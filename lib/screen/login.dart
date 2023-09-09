@@ -151,6 +151,11 @@ class LoginScreen extends StatelessWidget {
                     ],
                   )),
             ),
+            SizedBox(
+              //空白
+              width: 327,
+              height: 20,
+            ),
             TextButton(
                 onPressed: () => {context.goNamed('signup')},
                 child: const Text('Create Account')),
