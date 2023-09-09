@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../service/firebase/auth_error.dart';
 import '../service/firebase/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -10,33 +13,120 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text('ログイン'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'ログイン画面',
+            SizedBox(
+              //title
+              width: 239,
+              height: 43,
+              child: Text(
+                'とらぶった〜',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 40,
+                  fontFamily: 'SF Pro Text',
+                  fontWeight: FontWeight.w700,
+                  height: 0.53,
+                  letterSpacing: -0.32,
+                ),
+              ),
             ),
-            ElevatedButton(
-              child: Text("ログイン"),
-              onPressed: () {
-                context.goNamed('home');
-              },
+            SizedBox(
+              width: 113,
+              height: 113,
             ),
-            ElevatedButton(
-              child: Text("新規登録"),
-              onPressed: () {
-                context.goNamed('signup');
-              },
+            SizedBox(
+              //Email form
+              width: 327,
+              height: 57,
+
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "E-mail",
+                  icon: Icon(Icons.person_2),
+                ),
+              ),
+            ),
+            SizedBox(
+              //空白
+              width: 327,
+              height: 41,
+            ),
+            SizedBox(
+              //password form
+              width: 327,
+              height: 57,
+              child: TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Password",
+                  icon: Icon(Icons.key),
+                ),
+              ),
+            ),
+            SizedBox(
+              //空白
+              width: 327,
+              height: 90,
+            ),
+            SizedBox(
+              width: 224,
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.orange),
+                  foregroundColor: MaterialStatePropertyAll(Colors.white),
+                ),
+                onPressed: () async {
+                  final email = emailController.text;
+                  final password = passwordController.text;
+                  final result = await authService.signInWithEmailAndPassword(
+                      email, password, context);
+                  print('result: $result');
+
+                  if (result == FirebaseAuthResultStatus.Successful) {
+                    context.goNamed('home');
+                  } else {
+                    final errorMessage = exceptionMessage(result!);
+                    _showErrorDialog(context, errorMessage);
+                  }
+                },
+                child: Text("login"),
+              ),
+            ),
+            SizedBox(
+              width: 327,
             ),
           ],
         ),
       ),
     );
   }
+}
+
+void _showErrorDialog(BuildContext context, String? message) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        title: Text(message!),
+        actions: <Widget>[
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.pop(dialogContext);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

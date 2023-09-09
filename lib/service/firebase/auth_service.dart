@@ -3,10 +3,8 @@ import 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../screen/home.dart';
-import '../../screen/login.dart';
 import 'auth_error.dart';
 import 'database_service.dart';
 
@@ -64,18 +62,10 @@ class AuthService with ChangeNotifier {
         email: email,
         password: password,
       );
-      final user = result.user;
-      if (user != null) {
-        // ログイン成功時の処理
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
-      }
       return FirebaseAuthResultStatus.Successful;
     } catch (e) {
       // エラーハンドリングによるエラーメッセージの表示
       final error = handleException(e as FirebaseAuthException);
-      print("ログインエラー: $e");
       return error;
     }
   }
@@ -105,8 +95,10 @@ class AuthService with ChangeNotifier {
 
   // ログアウト
   Future<void> signOut(BuildContext context) async {
-    await _auth.signOut();
-    print("ログアウト完了");
-    // ログアウト後にログイン画面に遷移
+    await _auth.signOut().then((_) {
+      print("ログアウト完了");
+      // ログアウト後にログイン画面に遷移
+      context.goNamed('login');
+    });
   }
 }

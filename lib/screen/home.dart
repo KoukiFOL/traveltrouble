@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../service/firebase/auth_service.dart';
 
 // タイムライン画面
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('ホーム画面'),
@@ -19,7 +23,8 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               child: Text("ログイン画面へ遷移"),
               onPressed: () {
-                context.goNamed('login');
+                // ログアウト処理
+                authService.signOut(context);
               },
             ),
             ElevatedButton(
@@ -28,7 +33,6 @@ class HomeScreen extends StatelessWidget {
                 context.goNamed('post');
               },
             ),
-
           ],
         ),
       ),
