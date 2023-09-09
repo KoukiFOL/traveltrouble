@@ -21,6 +21,7 @@ class DatabaseService with ChangeNotifier {
       'email': email,
       'displayName': displayName,
       'from': from,
+      'createdAt': Timestamp.now(),
     });
   }
 
