@@ -10,12 +10,12 @@ import '../screen/signup.dart';
 
 final goRouter = GoRouter(
   // アプリが起動した時
-  initialLocation: '/',
+  initialLocation: '/login',
   // パスと画面の組み合わせ
   routes: [
     // ログイン画面
     GoRoute(
-      path: '/',
+      path: '/login',
       name: 'login',
       pageBuilder: (context, state) {
         return MaterialPage(
