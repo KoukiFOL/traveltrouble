@@ -82,7 +82,7 @@ class SignupScreen extends StatelessWidget {
               height: 40,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.orange),
+                  backgroundColor: MaterialStatePropertyAll(Colors.green),
                   foregroundColor: MaterialStatePropertyAll(Colors.white),
                 ),
                 onPressed: () async {
@@ -99,13 +99,15 @@ class SignupScreen extends StatelessWidget {
                     showErrorDialog(context, errorMessage);
                   }
                 },
-                child: Text("CREATE"),
+                child: Text("CREATE",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    )),
               ),
             ),
             // back to login with text button
             SizedBox(
-              width: 224,
-              height: 40,
               child: TextButton(
                 onPressed: () {
                   context.goNamed('login');

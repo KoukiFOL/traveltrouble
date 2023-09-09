@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
               height: 40,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.orange),
+                  backgroundColor: MaterialStatePropertyAll(Colors.green),
                   foregroundColor: MaterialStatePropertyAll(Colors.white),
                 ),
                 onPressed: () async {
@@ -99,7 +99,11 @@ class LoginScreen extends StatelessWidget {
                     showErrorDialog(context, errorMessage);
                   }
                 },
-                child: Text("LOGIN"),
+                child: Text("LOGIN",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    )),
               ),
             ),
             SizedBox(
