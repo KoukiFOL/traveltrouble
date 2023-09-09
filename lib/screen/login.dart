@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:traveltrouble/Compornents/appTitle.dart';
 import '../Compornents/dialog.dart';
 import '../service/firebase/auth_error.dart';
 import '../service/firebase/auth_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -18,36 +20,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              height: 100,
-              width: 100,
-              child: Image(image: AssetImage('../assets/tiger.PNG')),
-            ),
-
-            const SizedBox(
-              height: 5,
-            ),
-            const SizedBox(
-              //title
-              width: 239,
-              height: 43,
-              child: Text(
-                'とらぶった〜',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40,
-                  fontFamily: 'SF Pro Text',
-                  fontWeight: FontWeight.w700,
-                  height: 0.53,
-                  letterSpacing: -0.32,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 113,
-              height: 113,
-            ),
+            TitleComponent(),
             SizedBox(
               //Email form
               width: 327,
