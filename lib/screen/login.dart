@@ -19,6 +19,9 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
+              height: 114,
+            ),
+            SizedBox(
               //title
               width: 239,
               height: 43,

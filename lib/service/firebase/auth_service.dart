@@ -1,5 +1,4 @@
 // 認証に関する処理を記述
-import 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
