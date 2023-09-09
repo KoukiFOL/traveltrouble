@@ -149,6 +149,7 @@ class ProfileScreen extends StatelessWidget {
               final userPosts = snapshot.data?.docs ?? [];
               print('userPosts: $userPosts');
               return Expanded(
+                // TODO: POSTコンポーネントを作成して、ここに表示する
                 child: ListView.builder(
                   itemCount: userPosts.length,
                   itemBuilder: (context, index) {
