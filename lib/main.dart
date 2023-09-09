@@ -137,7 +137,9 @@ class _MyHomePageState extends State<MyHomePage> {
               width:81,
               height:10,
               child: ElevatedButton(
+                  onPressed: null , // nullを(){}に差し替えて{}無いに処理を記述する
                   child:Text("login"),
+
               ),
             )
           ],
