@@ -67,6 +67,20 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(child: Text('Japan')),
             ],
           ),
+          const SizedBox(
+            height: 104,
+          ),
+          const Text('Troubles'),
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            height: 1,
+            thickness: 0,
+            indent: 0,
+            endIndent: 0,
+            color: Colors.black,
+          ),
         ]),
       ),
     );
