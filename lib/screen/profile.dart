@@ -1,12 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:traveltrouble/Compornents/postComponent.dart';
 
+import '../model/dateFormat.dart';
 import '../service/firebase/auth_service.dart';
 import '../service/firebase/database_service.dart';
 
 // プロフィール画面
 class ProfileScreen extends StatelessWidget {
+  get post => null;
+
+  String displayName = '';
+  String from = '';
+
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
@@ -54,8 +62,8 @@ class ProfileScreen extends StatelessWidget {
                 return Text('ユーザーデータが見つかりません');
               }
               final userData = snapshot.data?.data() as Map<String, dynamic>;
-              final displayName = userData['displayName'] as String;
-              final from = userData['from'] as String;
+              displayName = userData['displayName'];
+              from = userData['from'];
 
               return Column(
                 children: [
@@ -147,17 +155,26 @@ class ProfileScreen extends StatelessWidget {
                 return Text('投稿がありません');
               }
               final userPosts = snapshot.data?.docs ?? [];
-              print('userPosts: $userPosts');
+
+              // ユーザの投稿を表示
               return Expanded(
-                // TODO: POSTコンポーネントを作成して、ここに表示する
                 child: ListView.builder(
                   itemCount: userPosts.length,
                   itemBuilder: (context, index) {
-                    final post =
+                    final posts =
                         userPosts[index].data() as Map<String, dynamic>;
-                    return ListTile(
-                      title: Text(post['post']),
-                      subtitle: Text(post['destination']),
+                    final post = posts['post'] as String;
+                    final to = posts['destination'];
+                    final timestamp = posts['createdAt'];
+                    // dateをDateTimeに変換
+                    final date = DateFormat.convertTimeStampToTime(timestamp);
+
+                    return PostComponent(
+                      displayName: displayName,
+                      post: post,
+                      from: from,
+                      to: to,
+                      date: date,
                     );
                   },
                 ),
