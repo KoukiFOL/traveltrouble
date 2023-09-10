@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:traveltrouble/Router/router.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:traveltrouble/screen/home.dart';
 import 'package:traveltrouble/service/firebase/database_service.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart'; // providerをインポート
 import 'service/firebase/auth_service.dart'; // AuthServiceをインポート
-import 'screen/login.dart';
 
 void main() {
   Firebase.initializeApp(
@@ -35,12 +35,10 @@ class MyApp extends StatelessWidget {
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,
-
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.green,
       ),
-      // home: const AccoutScreen(),
     );
   }
 }
