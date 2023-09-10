@@ -17,6 +17,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         leading: IconButton(
             onPressed: () {
               _scaffoldKey.currentState!.openDrawer();

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../Compornents/appTitle.dart';
 import '../Compornents/dialog.dart';
 import '../service/firebase/auth_error.dart';
 import '../service/firebase/auth_service.dart';
@@ -19,27 +20,7 @@ class SignupScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              //title
-              width: 239,
-              height: 43,
-              child: Text(
-                'とらぶった〜',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40,
-                  fontFamily: 'SF Pro Text',
-                  fontWeight: FontWeight.w700,
-                  height: 0.53,
-                  letterSpacing: -0.32,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 113,
-              height: 113,
-            ),
+            TitleComponent(),
             SizedBox(
               //Email form
               width: 327,
@@ -64,6 +45,7 @@ class SignupScreen extends StatelessWidget {
               width: 327,
               height: 57,
               child: TextField(
+                obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -105,6 +87,11 @@ class SignupScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     )),
               ),
+            ),
+            SizedBox(
+              //空白
+              width: 327,
+              height: 20,
             ),
             // back to login with text button
             SizedBox(
