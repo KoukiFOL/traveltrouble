@@ -49,7 +49,7 @@ class DatabaseService with ChangeNotifier {
     String from,
     String destination,
     String post,
-    List<String> tags,
+    // List<String> tags,
   ) {
     // 投稿を追加
     // コレクション内容 users/{uid}/posts/{postId}とPosts/{postId}の二つに追加
@@ -58,23 +58,23 @@ class DatabaseService with ChangeNotifier {
         .doc(uid)
         .collection('posts')
         .add({
-          'fomr': from,
+          'form': from,
           'createdAt': Timestamp.now(),
           'destination': destination,
           'post': post,
-          'tags': tags,
+          // 'tags': tags,
         })
         .then((value) {
           _db.collection('posts').doc(value.id).set({
             'createdAt': Timestamp.now(),
             'destination': destination,
             'post': post,
-            'tags': tags,
+            // 'tags': tags,
             'uid': uid,
             'from': from,
           });
         })
-        .then((value) => print("Post Added"))
+        .then((value) => {print("Post Added")})
         .catchError((error) => print("Failed to add post: $error"));
   }
 
