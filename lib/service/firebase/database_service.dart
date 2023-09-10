@@ -39,6 +39,7 @@ class DatabaseService with ChangeNotifier {
   // tags: タグ (配列)}
   Future<void> addPostToFirestore(
     String uid,
+    String from,
     String destination,
     String post,
     List<String> tags,
@@ -50,6 +51,7 @@ class DatabaseService with ChangeNotifier {
         .doc(uid)
         .collection('posts')
         .add({
+          'fomr': from,
           'createdAt': Timestamp.now(),
           'destination': destination,
           'post': post,
@@ -62,6 +64,7 @@ class DatabaseService with ChangeNotifier {
             'post': post,
             'tags': tags,
             'uid': uid,
+            'from': from,
           });
         })
         .then((value) => print("Post Added"))
