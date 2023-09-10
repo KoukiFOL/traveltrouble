@@ -119,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 104,
+                    height: 40,
                   ),
                   const Text(
                     'Troubles',
@@ -170,8 +170,8 @@ class ProfileScreen extends StatelessWidget {
                     final date = DateFormat.convertTimeStampToTime(timestamp);
 
                     return PostComponent(
-                      displayName: displayName,
                       post: post,
+                      displayName: displayName,
                       from: from,
                       to: to,
                       date: date,

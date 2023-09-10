@@ -49,7 +49,7 @@ class PostScreen extends StatelessWidget {
                   // 投稿をFirestoreに追加
                   // その後、ホーム画面へ遷移
 
-                  database.addPostToFirestore(uid, from, post, to);
+                  database.addPostToFirestore(uid, from, to, post);
                   context.goNamed('home');
                 },
                 style: TextButton.styleFrom(

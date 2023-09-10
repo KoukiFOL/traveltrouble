@@ -58,7 +58,7 @@ class DatabaseService with ChangeNotifier {
         .doc(uid)
         .collection('posts')
         .add({
-          'form': from,
+          'from': from,
           'createdAt': Timestamp.now(),
           'destination': destination,
           'post': post,
