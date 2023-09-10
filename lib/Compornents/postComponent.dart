@@ -6,7 +6,15 @@ import 'package:go_router/go_router.dart';
 class PostComponent extends StatelessWidget {
   final String post;
   final String displayName;
-  const PostComponent({Key? key, required this.post, required this.displayName})
+  final String from;
+  final String to;
+
+  const PostComponent(
+      {Key? key,
+      required this.post,
+      required this.displayName,
+      required this.from,
+      required this.to})
       : super(key: key);
 
   @override
@@ -79,10 +87,10 @@ class PostComponent extends StatelessWidget {
                   children: [
                     Container(
                       // width: 200,
-                      child: const Text('From'),
+                      child: Text('From'),
                     ),
                     SizedBox(
-                      child: Text('Chaina'),
+                      child: Text(from),
                     ),
                   ],
                 ),
@@ -96,7 +104,7 @@ class PostComponent extends StatelessWidget {
                       child: const Text('To'),
                     ),
                     SizedBox(
-                      child: Text('Japan'),
+                      child: Text(to),
                     ),
                   ],
                 ),

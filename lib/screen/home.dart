@@ -81,8 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         // 投稿を表示
+
                         final post = posts[index].data()['post'];
                         final uid = posts[index].data()['uid'];
+                        final from = posts[index].data()['from'];
+                        final to = posts[index].data()['destination'];
 
                         return FutureBuilder(
                           future: databese.getUserDataFromFirestore(uid),
@@ -95,6 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               return PostComponent(
                                 post: post,
                                 displayName: displayName,
+                                from: from,
+                                to: to,
                               );
                             }
                             return Container();
