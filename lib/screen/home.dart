@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../Compornents/postComponent.dart';
+import '../model/dateFormat.dart';
 import '../service/firebase/auth_service.dart';
 import 'package:traveltrouble/Compornents/sideMenu.dart';
 
@@ -86,6 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         final uid = posts[index].data()['uid'];
                         final from = posts[index].data()['from'];
                         final to = posts[index].data()['destination'];
+                        final timestamp = posts[index].data()['createdAt'];
+                        // dateをDateTimeに変換
+                        final date =
+                            DateFormat.convertTimeStampToTime(timestamp);
 
                         return FutureBuilder(
                           future: databese.getUserDataFromFirestore(uid),
@@ -100,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 displayName: displayName,
                                 from: from,
                                 to: to,
+                                date: date,
                               );
                             }
                             return Container();

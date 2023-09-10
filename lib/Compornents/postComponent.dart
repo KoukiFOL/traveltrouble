@@ -8,13 +8,15 @@ class PostComponent extends StatelessWidget {
   final String displayName;
   final String from;
   final String to;
+  final String date;
 
   const PostComponent(
       {Key? key,
       required this.post,
       required this.displayName,
       required this.from,
-      required this.to})
+      required this.to,
+      required this.date})
       : super(key: key);
 
   @override
@@ -65,7 +67,7 @@ class PostComponent extends StatelessWidget {
                 ),
                 SizedBox(
                   child: Text(
-                    '日付',
+                    date,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 15,
