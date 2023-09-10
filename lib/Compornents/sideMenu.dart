@@ -63,6 +63,10 @@ class DropdownButtonMenu extends StatefulWidget {
 class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
   String isSelectedValue = 'Japan';
 
+  String getSelectedValue() {
+    return isSelectedValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
