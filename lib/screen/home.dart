@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../Compornents/postComponent.dart';
 import '../service/firebase/auth_service.dart';
 import 'package:traveltrouble/Compornents/sideMenu.dart';
 
@@ -63,41 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'ホーム画面',
                       ),
-                      Column(
-                        children: [
-                          // TODO: ここにタイムラインの表示を実装
-                          Container(
-                            height: 300,
-                            color: Colors.blue,
-                          ),
-                          Container(
-                            height: 300,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            height: 300,
-                            color: Colors.yellow,
-                          ),
-                          Container(
-                            height: 300,
-                            color: Colors.orange,
-                          ),
-                          Container(
-                            height: 300,
-                            color: Colors.purple,
-                          ),
-                          Container(
-                            height: 300,
-                            color: Colors.pink,
-                          ),
-                        ],
-                      ),
+                      PostComponent(),
                     ],
                   ),
                 ],
