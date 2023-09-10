@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../Compornents/postComponent.dart';
+import '../model/dateFormat.dart';
 import '../service/firebase/auth_service.dart';
 import 'package:traveltrouble/Compornents/sideMenu.dart';
+
+import '../service/firebase/database_service.dart';
 
 // タイムライン画面
 
@@ -19,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final databese = Provider.of<DatabaseService>(context);
     return Scaffold(
         key: _scaffoldKey,
         drawer: SideMenu(),
@@ -61,20 +67,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'ホーム画面',
-                      ),
-                      PostComponent(),
-                    ],
+            // getPostsFromFirestoreを使って投稿を取得
+            // FutureBuilderを使ってデータを取得
+            FutureBuilder(
+              future: databese.getPostsFromFirestore(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                // データが取得できた場合
+                if (snapshot.hasData) {
+                  // データを取得
+                  final posts = snapshot.data.docs;
+                  // postsからuidを取得し、ユーザーのデータを取得
+
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        // 投稿を表示
+
+                        final post = posts[index].data()['post'];
+                        final uid = posts[index].data()['uid'];
+                        final from = posts[index].data()['from'];
+                        final to = posts[index].data()['destination'];
+                        final timestamp = posts[index].data()['createdAt'];
+                        // dateをDateTimeに変換
+                        final date =
+                            DateFormat.convertTimeStampToTime(timestamp);
+
+                        return FutureBuilder(
+                          future: databese.getUserDataFromFirestore(uid),
+                          builder: ((context, snapshot) {
+                            if (snapshot.hasData) {
+                              final userData =
+                                  snapshot.data?.data() as Map<String, dynamic>;
+                              final displayName =
+                                  userData['displayName'] as String;
+                              return PostComponent(
+                                post: post,
+                                displayName: displayName,
+                                from: from,
+                                to: to,
+                                date: date,
+                              );
+                            }
+                            return Container();
+                          }),
+                        );
+                      },
+
+                      childCount: posts.length, // 投稿の数だけ表示
+                    ),
+                  );
+                }
+                // データが取得できなかった場合
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Container(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                    childCount: 1, // 1個の要素を表示
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ],
         ),

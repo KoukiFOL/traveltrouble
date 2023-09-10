@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class PostComponent extends StatelessWidget {
-  const PostComponent({Key? key}) : super(key: key);
+  final String post;
+  final String displayName;
+  final String from;
+  final String to;
+  final String date;
+
+  const PostComponent(
+      {Key? key,
+      required this.post,
+      required this.displayName,
+      required this.from,
+      required this.to,
+      required this.date})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +51,7 @@ class PostComponent extends StatelessWidget {
                 ),
                 SizedBox(
                   child: Text(
-                    'displayName',
+                    displayName,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -54,7 +67,7 @@ class PostComponent extends StatelessWidget {
                 ),
                 SizedBox(
                   child: Text(
-                    '日付',
+                    date,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -76,10 +89,10 @@ class PostComponent extends StatelessWidget {
                   children: [
                     Container(
                       // width: 200,
-                      child: const Text('From'),
+                      child: Text('From'),
                     ),
                     SizedBox(
-                      child: Text('Chaina'),
+                      child: Text(from),
                     ),
                   ],
                 ),
@@ -93,7 +106,7 @@ class PostComponent extends StatelessWidget {
                       child: const Text('To'),
                     ),
                     SizedBox(
-                      child: Text('Japan'),
+                      child: Text(to),
                     ),
                   ],
                 ),
@@ -105,7 +118,7 @@ class PostComponent extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                child: Text('posts'),
+                child: Text(post),
               ),
             ),
           ],
