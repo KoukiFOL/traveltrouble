@@ -21,12 +21,20 @@ class DatabaseService with ChangeNotifier {
       'email': email,
       'displayName': displayName,
       'from': from,
+      'createdAt': Timestamp.now(),
     });
   }
 
   // ユーザーのデータを取得
   Future<DocumentSnapshot> getUserDataFromFirestore(String uid) {
     // ユーザーのデータを取得
+    return _db.collection('users').doc(uid).get();
+  }
+
+  // CurrentUserのデータを取得
+  Future<DocumentSnapshot> getCurrentUserDataFromFirestore() {
+    // ユーザーのデータを取得
+    final uid = getCurrentUserDataFromFirestore() as String;
     return _db.collection('users').doc(uid).get();
   }
 
@@ -38,6 +46,7 @@ class DatabaseService with ChangeNotifier {
   // tags: タグ (配列)}
   Future<void> addPostToFirestore(
     String uid,
+    String from,
     String destination,
     String post,
     List<String> tags,
@@ -49,6 +58,7 @@ class DatabaseService with ChangeNotifier {
         .doc(uid)
         .collection('posts')
         .add({
+          'fomr': from,
           'createdAt': Timestamp.now(),
           'destination': destination,
           'post': post,
@@ -61,6 +71,7 @@ class DatabaseService with ChangeNotifier {
             'post': post,
             'tags': tags,
             'uid': uid,
+            'from': from,
           });
         })
         .then((value) => print("Post Added"))
@@ -71,5 +82,11 @@ class DatabaseService with ChangeNotifier {
   Future<QuerySnapshot> getPostsFromFirestore() {
     // 投稿を取得
     return _db.collection('posts').get();
+  }
+
+  // uidのユーザーの投稿を一覧で取得
+  Future<QuerySnapshot> getUserPostsFromFirestore(String uid) {
+    // 投稿を取得
+    return _db.collection('users').doc(uid).collection('posts').get();
   }
 }

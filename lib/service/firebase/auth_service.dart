@@ -100,4 +100,10 @@ class AuthService with ChangeNotifier {
       context.goNamed('login');
     });
   }
+
+  // CurrentUserのデータを取得
+  String getCurrentUserDataFromFirestore() {
+    // ユーザーのデータを取得
+    return _auth.currentUser?.uid ?? '';
+  }
 }
