@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class PostComponent extends StatelessWidget {
-  const PostComponent({Key? key}) : super(key: key);
+  final String post;
+  final String displayName;
+  const PostComponent({Key? key, required this.post, required this.displayName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class PostComponent extends StatelessWidget {
                 ),
                 SizedBox(
                   child: Text(
-                    'displayName',
+                    displayName,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -105,7 +108,7 @@ class PostComponent extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                child: Text('posts'),
+                child: Text(post),
               ),
             ),
           ],
