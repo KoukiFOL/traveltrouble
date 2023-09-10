@@ -62,18 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'ホーム画面',
-                      ),
-                      PostComponent(),
-                    ],
-                  ),
-                ],
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return PostComponent(); // PostComponentのインスタンスを返す
+                },
+                childCount: 10, // 10個の要素を表示
               ),
             ),
           ],
