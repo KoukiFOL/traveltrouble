@@ -54,7 +54,7 @@ class _DropdownButtonMenuState extends State<DropdownButtonMenu> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 200,
+        width: 120,
         child: DropdownButton(
           isExpanded: true,
           items: const [

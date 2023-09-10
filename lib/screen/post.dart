@@ -1,5 +1,9 @@
+import 'dart:html';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../Compornents/sideMenu.dart';
 
 // 投稿登録画面
 class PostScreen extends StatelessWidget {
@@ -7,11 +11,14 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          child: Column(
-        children: [
+        child: Column(children: [
+          SizedBox(
+            width: 10,
+            height: 15,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               TextButton(
                 child: Text('cancel'),
@@ -25,7 +32,9 @@ class PostScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text("trouble"),
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed('home');
+                },
                 style: TextButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 2, 0, 0),
                   textStyle: const TextStyle(fontSize: 20, color: Colors.black),
@@ -38,37 +47,50 @@ class PostScreen extends StatelessWidget {
               ),
             ],
           ),
-          Row(children: <Widget>[
+          const Row(children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
             CircleAvatar(
-              radius: 20,
+              radius: 18,
+            ),
+            SizedBox(
+              width: 15,
             ),
             Column(children: <Widget>[
               Text(
                 'from',
                 style: TextStyle(fontSize: 14),
               ),
-              DropdownButton(
-                items: const [
-                  DropdownMenuItem(
-                    value: 'America',
-                    child: Text('America'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'China',
-                    child: Text('China'),
-                  )
-                ],
-                value: isSelectedValue,
-                onChanged: (String? value) {
-                  setState(() {
-                    isSelectedValue = value!;
-                  });
-                },
-              ),
-            ])
+              DropdownButtonMenu(),
+            ]),
+            SizedBox(
+              width: 8,
+            ),
+            SizedBox(
+              height: 30,
+              width: 30,
+              child: Image(image: AssetImage('../assets/plane.png')),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Column(
+              children: <Widget>[
+                Text(
+                  'to',
+                  style: TextStyle(fontSize: 14),
+                ),
+                DropdownButtonMenu(),
+              ],
+            )
           ]),
-        ],
-      )),
+          TextFormField(
+            decoration: InputDecoration(
+                border: InputBorder.none, hintText: "What's trable?"),
+          ),
+        ]),
+      ),
     );
   }
 }
