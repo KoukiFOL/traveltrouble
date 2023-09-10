@@ -31,6 +31,13 @@ class DatabaseService with ChangeNotifier {
     return _db.collection('users').doc(uid).get();
   }
 
+  // CurrentUserのデータを取得
+  Future<DocumentSnapshot> getCurrentUserDataFromFirestore() {
+    // ユーザーのデータを取得
+    final uid = getCurrentUserDataFromFirestore() as String;
+    return _db.collection('users').doc(uid).get();
+  }
+
   // Postsコレクションに投稿を追加
   // Field {
   // createdAt: 投稿日時
@@ -75,5 +82,11 @@ class DatabaseService with ChangeNotifier {
   Future<QuerySnapshot> getPostsFromFirestore() {
     // 投稿を取得
     return _db.collection('posts').get();
+  }
+
+  // uidのユーザーの投稿を一覧で取得
+  Future<QuerySnapshot> getUserPostsFromFirestore(String uid) {
+    // 投稿を取得
+    return _db.collection('users').doc(uid).collection('posts').get();
   }
 }
