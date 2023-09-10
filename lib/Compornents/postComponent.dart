@@ -85,30 +85,22 @@ class PostComponent extends StatelessWidget {
             // fromを表示
             Row(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      // width: 200,
-                      child: Text('From'),
-                    ),
-                    SizedBox(
-                      child: Text(from),
-                    ),
-                  ],
+                SizedBox(
+                  child: Text(from),
                 ),
                 SizedBox(
-                  child: Image(image: AssetImage('../assets/arrow_right.png')),
+                  width: 5,
                 ),
-                Column(
-                  children: [
-                    Container(
-                      // width: 200,
-                      child: const Text('To'),
-                    ),
-                    SizedBox(
-                      child: Text(to),
-                    ),
-                  ],
+                SizedBox(
+                  width: 12,
+                  height: 12,
+                  child: Image(image: AssetImage('../assets/plane.png')),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                SizedBox(
+                  child: Text(to),
                 ),
               ],
             ),
